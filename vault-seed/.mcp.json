@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "jobspy": {
+      "command": "uvx",
+      "args": ["mcp-jobspy@1.4.1"]
+    }
+  }
+}
