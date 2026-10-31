@@ -13,12 +13,16 @@ try {
   $in = $raw | ConvertFrom-Json
   $cmd = "$($in.tool_input.command)"
   if (-not $cmd.Trim()) { exit 0 }
+  # 0. Before any match: no look-alike quotes or dashes, no odd spaces or line breaks, no backtick, no $( anywhere.
+  if ($cmd -match '[\u2010-\u2015\u2018-\u201F\u00A0\u2028\u2029\u0085\u200B-\u200D\u2060\uFEFF`]|\$\(') { Block 'unusual characters in the command' $RunMsg }
   $c = ($cmd -replace '\s+', ' ').Trim()
 
   # 1. The notebook's own tools, exact forms only (either slash, optional .\ and .exe). Arguments are plain.
+  # Quoted text holds only letters (any language, accents included), digits, space and . , - _ : / \ ' ! ?
+  $sf = "[\p{L}\p{N} .,_:/\\'!?-]"
   $ps = '^powershell(?:\.exe)? -NoProfile -ExecutionPolicy Bypass -File (?:\.[\\/])?'
   $url = '(?:"https://[A-Za-z0-9._~:/?#=%&+-]{1,400}"|https://[A-Za-z0-9._~:/?#=%+-]{1,400})'
-  $note = '(?:"[^"`$;|&<>\r\n]{1,200}\.md"|[A-Za-z0-9._/\\-]{1,200}\.md)'
+  $note = '(?:"' + $sf + '{1,200}\.md"|[A-Za-z0-9._/\\-]{1,200}\.md)'
   $own = @(
     ($ps + 'playbook[\\/]help-bundle\.ps1$'),
     ($ps + 'playbook[\\/]tools[\\/]install-planner\.ps1$'),
@@ -29,10 +33,10 @@ try {
   # git and gh: only the exact commands the kit's stage and helper files give. Everything else (any other
   # subcommand or flag, --output, -c, --exec, --upload-pack, clone, pull, fetch, checkout, apply, download...) blocks.
   $nm = '[A-Za-z0-9._-]{1,100}'; $us = '[A-Za-z0-9-]{1,39}'; $cn = '(?:origin|backup-unchecked)'
-  $qt = '"[^"`$;|&<>\r\n]{1,200}"'
-  $pa = '(?:"[^"`$;|&<>\r\n]{1,300}"|[\p{L}\p{N}_/\\][\p{L}\p{N}._/\\-]{0,299})'
-  $gitOk = @('^git --version$', '^git status$', '^git init$', '^git remote$', '^git log -1 --oneline$',
-    '^git config core\.quotepath(?: false)?$', ('^git config user\.name ' + $qt + '$'), '^git config user\.email "[^"`$;|&<>\s]{3,120}"$',
+  $qt = '"' + $sf + '{1,200}"'
+  $pa = '(?:"' + $sf + '{1,300}"|[\p{L}\p{N}_/\\][\p{L}\p{N}._/\\-]{0,299})'
+  $gitOk = @('^git --version$', '^git status(?: --short| -s| --porcelain)?$', '^git init$', '^git remote$', '^git log -1 --oneline$',
+    '^git config core\.quotepath(?: false)?$', ('^git config user\.name ' + $qt + '$'), '^git config user\.email "[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9.-]{1,120}"$',
     ('^git add (?:-- )?' + $pa + '(?: ' + $pa + '){0,200}$'), ('^git commit -m ' + $qt + '$'),
     ('^git remote add backup-unchecked https://github\.com/' + $us + '/' + $nm + '$'),
     '^git remote rename (?:origin backup-unchecked|backup-unchecked origin)$', ('^git remote get-url ' + $cn + '$'),
@@ -45,7 +49,7 @@ try {
     ('^gh api -X DELETE repos/' + $us + '/' + $nm + '/collaborators/' + $us + '$'))
   foreach ($o in ($gitOk + $ghOk)) { if ($c -cmatch $o) { exit 0 } }
   # Opening a web page, the Obsidian notebook or Chrome on a web page is fine (no program of the person's choosing).
-  if ($c -match '^Start-Process (?:chrome )?"(?:https://|obsidian://open\?path=)[^"`$;|&<>]{1,800}"$') { exit 0 }
+  if ($c -match '^Start-Process (?:chrome )?"(?:https://|obsidian://open\?path=)[A-Za-z0-9._~:/?#=%+-]{1,800}"$') { exit 0 }
 
   # Installing one of the kit's own programs, in the exact form stage 1 uses.
   if ($c -cmatch '^winget install --id (?:Google\.Chrome|GitHub\.cli|Git\.Git|Obsidian\.Obsidian|yt-dlp\.yt-dlp|OpenJS\.NodeJS\.LTS|Anthropic\.Claude|astral-sh\.uv) --exact --silent --accept-package-agreements --accept-source-agreements$') { exit 0 }
@@ -70,8 +74,8 @@ try {
   if ($c -match '\$\(|`|<\(|\$\{') { Block 'program or script' $RunMsg }
   # Every command word must be one the kit uses for reading or for git, gh and Obsidian; any other program blocks.
   $okHeads = @('git','gh','obsidian','where','where.exe','cd','set-location','sl','pwd','get-location','ls','dir','get-childitem','gci',
-    'get-content','gc','cat','type','head','tail','select-string','sls','grep','rg','findstr','get-item','gi','test-path','get-timezone',
-    'get-date','date','resolve-path','split-path','join-path','measure-object','measure','sort-object','sort','select-object','select',
+    'get-content','gc','cat','type','head','tail','select-string','sls','grep','findstr','get-item','gi','test-path','get-timezone',
+    'get-date','date','resolve-path','split-path','join-path','measure-object','measure','sort-object','select-object','select',
     'where-object','?','foreach-object','%','format-table','ft','format-list','fl','out-null','out-string','echo','write-output',
     'write-host','wc','get-command','gcm','whoami','hostname','convertfrom-json','convertto-json','get-filehash','true')
   # Quoted text is data, not a command: set it aside so ; | & inside quotes do not split a command.
@@ -89,8 +93,6 @@ try {
       $hit = $false; foreach ($o in $list) { if ($full -cmatch $o) { $hit = $true; break } }
       if (-not $hit) { Block "git or gh command not on the notebook's list" $RunMsg }
     }
-    # sort and rg can write a file or run a program through a flag.
-    if (($head -eq 'sort' -or $head -eq 'rg') -and $full -match '(?i)\s(?:-o|--output|--pre|--pre-glob)(?:[\s=]|$)') { Block 'file write by command' $WriteMsg }
   }
   # Obsidian can run code through some of its commands.
   if ($c -match '(?i)\bobsidian\s+(?:eval|command|dev\S*|devtools|plugin\S*|theme\S*|snippet\S*)') { Block 'program or script' $RunMsg }
