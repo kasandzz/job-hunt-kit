@@ -1,6 +1,6 @@
 ---
 name: notebook-guide
-description: Keep one note, How my notebook works, up to date: their folders in plain words, the helpers they have, and the exact words that start each one. Rewrites only that one note, when asked, and never deletes or changes any other note. Triggers: "how does my notebook work", "update my notebook guide", "cómo funciona mi cuaderno", "actualiza la guía de mi cuaderno".
+description: Keep one note, How my notebook works, up to date: their folders in plain words, the helpers they have, and the exact words that start each one. Rewrites only that one note, when asked, and never deletes or changes any other note. Triggers: "how does my notebook work", "update my notebook guide", "cómo funciona mi cuaderno", "actualiza la guía de mi cuaderno", "kaip veikia mano sąsiuvinis", "atnaujink sąsiuvinio vadovą".
 ---
 
 ## Steps

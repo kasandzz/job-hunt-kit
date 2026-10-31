@@ -1,6 +1,6 @@
 ---
 name: job-tracker
-description: Keep track of jobs: save a job from a link or pasted text as a note, keep a tracker table of every application with follow-up dates, draft a follow-up email (never sent), and suggest the next step. Triggers: "save this job", "track a job", "add this job", "guarda esta vacante", "agrega esta vacante".
+description: Keep track of jobs: save a job from a link or pasted text as a note, keep a tracker table of every application with follow-up dates, draft a follow-up email (never sent), and suggest the next step. Triggers: "save this job", "track a job", "add this job", "guarda esta vacante", "agrega esta vacante", "išsaugok šį skelbimą", "pridėk šį darbą".
 ---
 
 ## Steps

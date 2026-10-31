@@ -1,6 +1,6 @@
 ---
 name: drive-finder
-description: Find a file in Google Drive by searching with a few different phrasings and give the top 5 with links. Triggers: "find the file", "find my document", "busca el archivo", "encuentra mi documento".
+description: Find a file in Google Drive by searching with a few different phrasings and give the top 5 with links. Triggers: "find the file", "find my document", "busca el archivo", "encuentra mi documento", "rask failą", "rask mano dokumentą".
 ---
 
 ## Steps

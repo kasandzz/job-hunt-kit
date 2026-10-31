@@ -1,6 +1,6 @@
 ---
 name: email-digest
-description: Quick digest of the last 24 hours of unread email, grouped into needs-a-reply, FYI and promotions (count only), with an offer to draft replies. Triggers: "what's in my email", "check my email", "qué hay en mi correo", "revisa mi correo".
+description: Quick digest of the last 24 hours of unread email, grouped into needs-a-reply, FYI and promotions (count only), with an offer to draft replies. Triggers: "what's in my email", "check my email", "qué hay en mi correo", "revisa mi correo", "kas naujo mano pašte", "patikrink mano paštą".
 ---
 
 ## Steps

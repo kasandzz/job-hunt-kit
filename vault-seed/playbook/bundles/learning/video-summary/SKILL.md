@@ -1,6 +1,6 @@
 ---
 name: video-summary
-description: Summarise a YouTube or Vimeo video from its captions, in the user's language, with one action tied to their goals. Triggers: "summarise this video", "summarize this video", "resume este video", "resúmeme este video".
+description: Summarise a YouTube or Vimeo video from its captions, in the user's language, with one action tied to their goals. Triggers: "summarise this video", "summarize this video", "resume este video", "resúmeme este video", "apibendrink šį vaizdo įrašą", "trumpai papasakok šį vaizdo įrašą".
 ---
 
 ## Steps

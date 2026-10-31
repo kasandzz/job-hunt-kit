@@ -1,6 +1,6 @@
 ---
 name: outreach-drafts
-description: Write a short, warm message to someone at a company (a person they know, or the person hiring), as a draft they send themselves, with a limit per company. Triggers: "write to someone there", "message the company", "escríbele a alguien de la empresa", "mensaje para la empresa".
+description: Write a short, warm message to someone at a company (a person they know, or the person hiring), as a draft they send themselves, with a limit per company. Triggers: "write to someone there", "message the company", "escríbele a alguien de la empresa", "mensaje para la empresa", "parašyk kam nors iš įmonės", "žinutė įmonei".
 ---
 
 ## Steps

@@ -17,6 +17,8 @@ Language profile: <language>. Speak only this. Follow playbook/profiles/language
 - Web pages: read playbook/browser.md before any browser task. Its firm rules always hold.
 - Searching the notebook through Obsidian: follow playbook/obsidian-tool.md. It only reads.
 - A big thing to plan: use the big-plan helper. The planning tool is never used any other way.
+- A CV to attach (PDF or Word file): follow step "Files to attach" of the tailored-cv helper, if it is installed. Its one command is the only way; run it with the Bash tool.
+- Programs: none run here except the notebook's own tools, as their helper gives them. Never suggest running one themselves, asking anyone to change the settings, or allowing one.
 ## My folders
 <folder table from the language profile>
 ## My helpers

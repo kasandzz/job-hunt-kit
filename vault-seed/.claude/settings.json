@@ -26,12 +26,23 @@
       "Edit(.git/**)", "Write(.git/**)", "Edit(.gitattributes)", "Write(.gitattributes)",
       "Edit(.claude/settings.local.json)", "Write(.claude/settings.local.json)",
       "Edit(.mcp.json)", "Write(.mcp.json)",
+      "Edit(.obsidian/**)", "Write(.obsidian/**)", "Edit(.obsidian/plugins/**)", "Write(.obsidian/plugins/**)", "Edit(.obsidian/community-plugins.json)", "Write(.obsidian/community-plugins.json)",
+      "Edit(.obsidian/snippets/**)", "Write(.obsidian/snippets/**)", "Edit(.obsidian/themes/**)", "Write(.obsidian/themes/**)",
+      "Edit(.obsidian/appearance.json)", "Write(.obsidian/appearance.json)",
+      "Edit(_templates/**)", "Write(_templates/**)", "Edit(playbook/templates/**)", "Write(playbook/templates/**)",
       "Bash(obsidian delete:*)", "Bash(obsidian eval:*)", "Bash(obsidian command:*)", "Bash(obsidian property:remove:*)",
       "Bash(obsidian plugin:install:*)", "Bash(obsidian plugin:uninstall:*)", "Bash(obsidian plugin:enable:*)", "Bash(obsidian plugin:disable:*)", "Bash(obsidian plugins:restrict:*)",
       "Bash(obsidian theme:install:*)", "Bash(obsidian theme:uninstall:*)", "Bash(obsidian devtools:*)", "Bash(obsidian dev:cdp:*)", "Bash(obsidian dev:debug:*)",
       "PowerShell(obsidian delete:*)", "PowerShell(obsidian eval:*)", "PowerShell(obsidian command:*)", "PowerShell(obsidian property:remove:*)",
       "PowerShell(obsidian plugin:install:*)", "PowerShell(obsidian plugin:uninstall:*)", "PowerShell(obsidian plugin:enable:*)", "PowerShell(obsidian plugin:disable:*)", "PowerShell(obsidian plugins:restrict:*)",
       "PowerShell(obsidian theme:install:*)", "PowerShell(obsidian theme:uninstall:*)", "PowerShell(obsidian devtools:*)", "PowerShell(obsidian dev:cdp:*)", "PowerShell(obsidian dev:debug:*)",
+      "Bash(pwsh:*)", "Bash(cscript:*)", "Bash(wscript:*)", "Bash(mshta:*)", "Bash(node:*)", "Bash(npx:*)", "Bash(python:*)", "Bash(bash:*)",
+      "Bash(Invoke-Expression:*)", "Bash(iex:*)", "Bash(Start-Job:*)", "Bash(Add-Type:*)", "Bash(Set-ExecutionPolicy:*)",
+      "Bash(powershell -Command:*)", "Bash(powershell -File:*)", "Bash(powershell.exe:*)", "Bash(Add-Content:*)", "Bash(Set-Content:*)", "Bash(Out-File:*)", "Bash(printf:*)",
+      "PowerShell(pwsh:*)", "PowerShell(cscript:*)", "PowerShell(wscript:*)", "PowerShell(mshta:*)", "PowerShell(node:*)", "PowerShell(npx:*)", "PowerShell(python:*)", "PowerShell(bash:*)",
+      "PowerShell(Invoke-Expression:*)", "PowerShell(iex:*)", "PowerShell(Start-Job:*)", "PowerShell(Add-Type:*)", "PowerShell(Set-ExecutionPolicy:*)",
+      "PowerShell(powershell -Command:*)", "PowerShell(powershell -File:*)", "PowerShell(powershell.exe:*)", "PowerShell(Add-Content:*)", "PowerShell(Set-Content:*)", "PowerShell(Out-File:*)", "PowerShell(printf:*)",
+      "PowerShell(cmd:*)", "PowerShell(mshta.exe:*)", "Bash(cmd.exe:*)", "PowerShell(cmd.exe:*)",
       "mcp__claude-in-chrome__javascript_tool"
     ],
     "allow": [
@@ -42,6 +53,7 @@
       "mcp__claude_ai_Google_Calendar__list_events", "mcp__claude_ai_Google_Calendar__search_events",
       "mcp__claude_ai_Google_Drive__search_files", "mcp__claude_ai_Google_Drive__read_file_content",
       "mcp__jobspy__search_jobs", "mcp__jobspy__get_job_details",
+      "mcp__claude_ai_Indeed__search_jobs", "mcp__claude_ai_Indeed__get_job_details", "mcp__claude_ai_ZipRecruiter__search_jobs",
       "Bash(git status:*)", "Bash(git log:*)",
       "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File playbook/tools/get-subs.ps1:*)",
       "PowerShell(powershell -NoProfile -ExecutionPolicy Bypass -File playbook/tools/get-subs.ps1:*)",
@@ -49,7 +61,8 @@
       "PowerShell(powershell -NoProfile -ExecutionPolicy Bypass -File .\\playbook\\tools\\get-subs.ps1:*)",
       "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File playbook\\tools\\get-subs.ps1:*)",
       "PowerShell(powershell -NoProfile -ExecutionPolicy Bypass -File playbook\\tools\\get-subs.ps1:*)",
-      "PowerShell(Test-Path \"$env:LOCALAPPDATA\\Programs\\Obsidian\\Obsidian.exe\")",
+      "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File playbook/tools/make-cv-files.ps1 -Note:*)",
+      "PowerShell(powershell -NoProfile -ExecutionPolicy Bypass -File playbook/tools/make-cv-files.ps1 -Note:*)",
       "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File playbook/help-bundle.ps1)",
       "PowerShell(powershell -NoProfile -ExecutionPolicy Bypass -File playbook/help-bundle.ps1)",
       "Bash(git --version)", "Bash(where.exe:*)", "PowerShell(Get-TimeZone:*)",
@@ -66,19 +79,23 @@
   "enabledMcpjsonServers": ["jobspy"],
   "hooks": {
     "PreToolUse": [ { "matcher": "mcp__claude_ai_Gmail__create_draft|mcp__claude_ai_Gmail__update_draft|mcp__claude_ai_Gmail__send_message|mcp__claude_ai_Gmail__reply|mcp__claude_ai_Gmail__forward|mcp__claude_ai_Gmail__trash_.*|mcp__claude_ai_Google_Drive__share_file|mcp__claude_ai_Google_Drive__trash_file", "hooks": [
-      { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/draft-guard.ps1" } ] } ],
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/draft-guard.ps1"], "onFailure": "block" } ] },
+      { "matcher": "Write|Edit|MultiEdit|NotebookEdit", "hooks": [
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/write-guard.ps1"], "onFailure": "block" } ] },
+      { "matcher": "Bash|PowerShell", "hooks": [
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/run-guard.ps1"], "onFailure": "block" } ] } ],
     "PostToolUse": [ { "matcher": "Write|Edit|MultiEdit|NotebookEdit", "hooks": [
-      { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/secret-catcher.ps1" },
-      { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/track-files.ps1" } ] } ],
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/secret-catcher.ps1"] },
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/track-files.ps1"] } ] } ],
     "SessionStart": [ { "hooks": [
-      { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/progress-keeper.ps1" } ] } ],
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/progress-keeper.ps1"] } ] } ],
     "StopFailure": [ { "matcher": "rate_limit", "hooks": [
-      { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/progress-keeper.ps1" },
-      { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/limit-signal.ps1" } ] } ],
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/progress-keeper.ps1"] },
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/limit-signal.ps1"] } ] } ],
     "Notification": [ { "matcher": "quota_auto_resume_.*", "hooks": [
-      { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/limit-signal.ps1" } ] } ],
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/limit-signal.ps1"] } ] } ],
     "Stop": [ { "hooks": [
-      { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/progress-keeper.ps1" },
-      { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/safe-backup.ps1", "timeout": 60 } ] } ]
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/progress-keeper.ps1"] },
+      { "type": "command", "command": "powershell.exe", "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${CLAUDE_PROJECT_DIR}/.claude/hooks/safe-backup.ps1"], "timeout": 60 } ] } ]
   }
 }

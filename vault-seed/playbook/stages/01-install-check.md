@@ -10,7 +10,7 @@ Make sure the programs work, switch off training on their conversations, open th
 
 2. **Check the programs quietly.** Do not narrate the checks. Run each one:
    - `git --version` (any version number = fine).
-   - Obsidian: check the file `%LOCALAPPDATA%\Programs\Obsidian\Obsidian.exe` exists (run exactly `Test-Path "$env:LOCALAPPDATA\Programs\Obsidian\Obsidian.exe"` with the PowerShell tool; this exact command is pre-allowed, so never reword it or list that folder another way).
+   - Obsidian: read `playbook/state/apps.md` with the Read tool (the installer checked and wrote `obsidian: found` or `obsidian: missing`). If it says `found`, fine. If the file is missing or says `missing`, look once with the Glob tool: pattern `Obsidian.exe`, folder `<user folder>/AppData/Local/Programs/Obsidian`, where the user folder is the start of the notebook path (like `C:/Users/<name>`). Never check it with a command (a command raises a permission box every time).
    - yt-dlp: run `where.exe yt-dlp` (it must print a path; also accept `%LOCALAPPDATA%\Microsoft\WinGet\Links\yt-dlp.exe` existing), then run `powershell -NoProfile -ExecutionPolicy Bypass -File playbook/tools/get-subs.ps1 -Url https://youtu.be/dQw4w9WgXcQ -ValidateOnly` (exit code 0 = fine). Never run `yt-dlp` itself; it is blocked on purpose.
    - Claude app: you are running inside it, so it is fine.
    - Node.js (a small engine the planning tool runs on; never name it to the user): run `where.exe node`. Also accept `node.exe` found with the Glob tool in `C:/Program Files/nodejs`.

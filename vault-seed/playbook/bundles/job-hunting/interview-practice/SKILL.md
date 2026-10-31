@@ -1,6 +1,6 @@
 ---
 name: interview-practice
-description: Practise a job interview: 8 likely questions from the job note, asked one at a time with kind feedback on five points, building a bank of their true work stories, and ending with the 3 strongest answers saved. Triggers: "practise my interview", "practice my interview", "practicar entrevista", "practiquemos la entrevista".
+description: Practise a job interview: 8 likely questions from the job note, asked one at a time with kind feedback on five points, building a bank of their true work stories, and ending with the 3 strongest answers saved. Triggers: "practise my interview", "practice my interview", "practicar entrevista", "practiquemos la entrevista", "repetuokime darbo pokalbį", "pasiruoškime pokalbiui".
 ---
 
 ## Steps

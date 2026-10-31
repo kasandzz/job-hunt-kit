@@ -1,6 +1,6 @@
 ---
 name: cover-letter
-description: Write a cover letter of 250 words or fewer for one job, from the job note and what we know about the user, shown for approval and saved next to the job note. Triggers: "cover letter", "write a cover letter", "carta de presentación", "escribe una carta de presentación".
+description: Write a cover letter of 250 words or fewer for one job, from the job note and what we know about the user, shown for approval and saved next to the job note. Triggers: "cover letter", "write a cover letter", "carta de presentación", "escribe una carta de presentación", "motyvacinis laiškas", "parašyk motyvacinį laišką".
 ---
 
 ## Steps

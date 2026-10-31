@@ -1,6 +1,6 @@
 ---
 name: goals
-description: Show goals with their latest progress, log new progress and ask one gentle question about the next step. Triggers: "my goals", "update my goal", "mis metas", "actualiza mi meta".
+description: Show goals with their latest progress, log new progress and ask one gentle question about the next step. Triggers: "my goals", "update my goal", "mis metas", "actualiza mi meta", "mano tikslai", "atnaujink mano tikslą".
 ---
 
 ## Steps

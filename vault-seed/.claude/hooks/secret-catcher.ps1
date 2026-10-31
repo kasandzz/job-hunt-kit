@@ -24,9 +24,17 @@ function Test-Clabe([string]$d) {
   for ($i = 0; $i -lt 17; $i++) { $s += ([int][string]$d[$i] * $w[$i % 3]) % 10 }
   return (((10 - ($s % 10)) % 10) -eq [int][string]$d[17])
 }
+# Not a secret: the kit's own placeholder in any language ("(private, not saved)", "(privado, no guardado)"),
+# anything already hidden, and plain answers about whether they know it ("yes", "si", "no", "la sabe").
+# Without this the kit's own placeholder raised a false "password hidden" alarm (sandbox test 2026-10-30).
+function Test-NotSecret([string]$v) {
+  $t = $v.Trim().Trim([char]96, [char]34, [char]39, [char]42, [char]95).Trim()
+  if ($t -eq '[hidden]' -or $t -match '^\([^()]{0,60}\s[^()]{0,60}\)\.?$') { return $true }   # a few words in brackets, never one bare token
+  return ($t -match ('(?i)^(yes|no|si|s' + [char]0xED + '|known|unknown|knows it|sabe|la sabe|no la sabe|ok|n/a|none|ninguna|taip|ne|-)$'))
+}
 # password-like lines: keep the label, hide the value. Separators : = - es is.
 # Value stops at | or ** (table cells, markdown bold) and never swallows the CR of CRLF.
-$text = [regex]::Replace($text, '(?im)^([^\r\n]*\b(?:password|passcode|pin|nip|contrase.a|clave (?:de acceso|secreta|del banco|bancaria))\b[*_]*[ \t]*(?:[:=-]|\bes\b|\bis\b)[*_]*[ \t]*)(\S(?:(?!\*\*)[^|\r\n])*?)(?=[ \t]*(?:\*\*|\||\r|\n|\z))', { param($m) $m.Groups[1].Value + $MASK })
+$text = [regex]::Replace($text, '(?im)^([^\r\n]*\b(?:password|passcode|pin|nip|contrase.a|slapta.odis|clave (?:de acceso|secreta|del banco|bancaria))\b[*_]*[ \t]*(?:[:=-]|\bes\b|\bis\b)[*_]*[ \t]*)(\S(?:(?!\*\*)[^|\r\n])*?)(?=[ \t]*(?:\*\*|\||\r|\n|\z))', { param($m) if (Test-NotSecret $m.Groups[2].Value) { $m.Value } else { $m.Groups[1].Value + $MASK } })
 # bare PIN / NIP followed by 4-6 digits
 $text = [regex]::Replace($text, '(?i)\b((?:pin|nip)[ \t]+)\d{4,6}\b', { param($m) $m.Groups[1].Value + $MASK })
 # UK sort code / account

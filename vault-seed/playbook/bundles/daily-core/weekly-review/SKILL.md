@@ -1,6 +1,6 @@
 ---
 name: weekly-review
-description: Weekly review of the last 7 daily notes (wins, patterns in mood and energy, goal progress) ending with next week's top 3, saved as a week note. Then it tidies the inbox folder, and once a month checks the "how to talk to me" rules. Triggers: "weekly review", "how was my week", "revisión semanal", "cómo me fue esta semana".
+description: Weekly review of the last 7 daily notes (wins, patterns in mood and energy, goal progress) ending with next week's top 3, saved as a week note. Then it tidies the inbox folder, and once a month checks the "how to talk to me" rules. Triggers: "weekly review", "how was my week", "revisión semanal", "cómo me fue esta semana", "savaitės apžvalga", "kaip man sekėsi šią savaitę".
 ---
 
 ## Steps

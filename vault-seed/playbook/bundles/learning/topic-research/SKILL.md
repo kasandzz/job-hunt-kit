@@ -1,6 +1,6 @@
 ---
 name: topic-research
-description: Look into a question on the web, read at least 4 sources and write a short brief that leads with the answer, with a source link for every claim. Triggers: "research this for me", "look into this for me", "investiga esto", "averigua esto".
+description: Look into a question on the web, read at least 4 sources and write a short brief that leads with the answer, with a source link for every claim. Triggers: "research this for me", "look into this for me", "investiga esto", "averigua esto", "paieškok apie tai", "išsiaiškink tai".
 ---
 
 ## Steps

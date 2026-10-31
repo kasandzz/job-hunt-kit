@@ -1,6 +1,6 @@
 ---
 name: company-brief
-description: Before an interview, find out about the company on the web and make a short brief with practice questions and good questions to ask them. Triggers: "research this company", "brief me on the company", "investiga esta empresa", "prepárame para la empresa".
+description: Before an interview, find out about the company on the web and make a short brief with practice questions and good questions to ask them. Triggers: "research this company", "brief me on the company", "investiga esta empresa", "prepárame para la empresa", "paieškok apie šią įmonę", "papasakok man apie įmonę".
 ---
 
 ## Steps

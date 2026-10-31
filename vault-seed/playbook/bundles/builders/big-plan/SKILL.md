@@ -1,6 +1,6 @@
 ---
 name: big-plan
-description: Turns one big thing they want to do (move house, a wedding, a trip, starting something new) into a clear plan with small steps, and keeps track of where they are. It is the plain-words front door to the planning tool in the notebook, so they never type a command. Triggers: "I have a big thing to plan", "help me plan something big", "tengo algo grande que planear", "ayúdame a planear algo grande".
+description: Turns one big thing they want to do (move house, a wedding, a trip, starting something new) into a clear plan with small steps, and keeps track of where they are. It is the plain-words front door to the planning tool in the notebook, so they never type a command. Triggers: "I have a big thing to plan", "help me plan something big", "tengo algo grande que planear", "ayúdame a planear algo grande", "turiu didelį darbą suplanuoti", "padėk suplanuoti kai ką didelio".
 ---
 
 ## Steps

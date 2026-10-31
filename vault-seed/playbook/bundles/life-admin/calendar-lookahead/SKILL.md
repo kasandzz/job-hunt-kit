@@ -1,6 +1,6 @@
 ---
 name: calendar-lookahead
-description: Look at the next 7 days of the calendar, flag clashes and early starts, and remind about birthdays from people notes. Triggers: "what's on this week", "what's on my calendar", "qué tengo esta semana", "qué tengo en mi calendario".
+description: Look at the next 7 days of the calendar, flag clashes and early starts, and remind about birthdays from people notes. Triggers: "what's on this week", "what's on my calendar", "qué tengo esta semana", "qué tengo en mi calendario", "ką turiu šią savaitę", "kas mano kalendoriuje".
 ---
 
 ## Steps

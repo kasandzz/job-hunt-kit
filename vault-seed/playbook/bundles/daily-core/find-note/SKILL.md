@@ -1,6 +1,6 @@
 ---
 name: find-note
-description: Find a note they saved in their notebook. Looks at each note's one-line summary and title first, and reads the full text only if that finds nothing. Shows up to 5 matches with the folder and the date. Triggers: "find my note about", "where did I save", "busca mi nota", "dónde guardé".
+description: Find a note they saved in their notebook. Looks at each note's one-line summary and title first, and reads the full text only if that finds nothing. Shows up to 5 matches with the folder and the date. Triggers: "find my note about", "where did I save", "busca mi nota", "dónde guardé", "rask mano užrašą apie", "kur išsaugojau".
 ---
 
 ## Steps

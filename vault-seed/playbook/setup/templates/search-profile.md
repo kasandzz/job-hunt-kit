@@ -6,7 +6,7 @@ updated: <yyyy-mm-dd>
 status: active
 tags: [job-search]
 summary: "<one line: the kind of job and where>"
-country: <MX or UK>
+country: <MX, UK or LT>
 ---
 # What I am looking for
 

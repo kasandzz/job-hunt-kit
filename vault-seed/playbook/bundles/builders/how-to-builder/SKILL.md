@@ -1,6 +1,6 @@
 ---
 name: how-to-builder
-description: Turn the way they do a job into a short step-by-step note they can follow next time or hand to someone else. Asks a few short questions, shows the steps for a yes, then saves one note in the how-to folder. Triggers: "write down how I do this", "make a how-to", "anota cómo hago esto", "haz un paso a paso".
+description: Turn the way they do a job into a short step-by-step note they can follow next time or hand to someone else. Asks a few short questions, shows the steps for a yes, then saves one note in the how-to folder. Triggers: "write down how I do this", "make a how-to", "anota cómo hago esto", "haz un paso a paso", "užrašyk, kaip aš tai darau", "padaryk instrukciją".
 ---
 
 ## Steps

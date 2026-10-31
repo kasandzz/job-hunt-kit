@@ -1,6 +1,6 @@
 ---
 name: morning-checkin
-description: Daily morning check-in that writes today's note first, then covers yesterday, mood, energy, calendar, email, today's top 3 and one deeper question. Triggers: "good morning", "let's start the day", "buenos días", "empecemos el día".
+description: Daily morning check-in that writes today's note first, then covers yesterday, mood, energy, calendar, email, today's top 3 and one deeper question. Triggers: "good morning", "let's start the day", "buenos días", "empecemos el día", "labas rytas", "pradėkime dieną".
 ---
 
 ## Steps

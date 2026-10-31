@@ -1,6 +1,6 @@
 ---
 name: job-fit
-description: Look closely at one job advert and say, in plain words, how well it fits them, whether it looks real, and what to do next. Triggers: "is this job for me", "check this job", "me conviene esta vacante", "revisa esta vacante".
+description: Look closely at one job advert and say, in plain words, how well it fits them, whether it looks real, and what to do next. Triggers: "is this job for me", "check this job", "me conviene esta vacante", "revisa esta vacante", "ar šis darbas man tinka", "patikrink šį skelbimą".
 ---
 
 ## Steps

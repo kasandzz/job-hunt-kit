@@ -1,6 +1,6 @@
 ---
 name: hiring-helper
-description: Get ready to hire someone, in drafts only: a plain description of the job, questions to ask every person, and a simple score sheet to compare people fairly on what the job needs. Never contacts anyone, never posts an advert, never decides who to hire. Triggers: "I need to hire someone", "write a job advert", "necesito contratar a alguien", "escribe un anuncio de trabajo".
+description: Get ready to hire someone, in drafts only: a plain description of the job, questions to ask every person, and a simple score sheet to compare people fairly on what the job needs. Never contacts anyone, never posts an advert, never decides who to hire. Triggers: "I need to hire someone", "write a job advert", "necesito contratar a alguien", "escribe un anuncio de trabajo", "man reikia ką nors pasamdyti", "parašyk darbo skelbimą".
 ---
 
 ## Steps

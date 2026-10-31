@@ -1,6 +1,6 @@
 ---
 name: project-builder
-description: Turn one thing they want to do into a short project note: the goal in one line, the steps in order, the very next small step, and a date if they have one. Asks at most 3 questions. Triggers: "start a project", "new project note", "empieza un proyecto", "nota de proyecto nueva".
+description: Turn one thing they want to do into a short project note: the goal in one line, the steps in order, the very next small step, and a date if they have one. Asks at most 3 questions. Triggers: "start a project", "new project note", "empieza un proyecto", "nota de proyecto nueva", "pradėk projektą", "naujas projekto užrašas".
 ---
 
 ## Steps

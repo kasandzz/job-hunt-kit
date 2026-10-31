@@ -1,4 +1,4 @@
-# Ayudante para buscar trabajo / Job-search helper
+# Ayudante para buscar trabajo / Job-search helper / Pagalbininkas darbo paieškai
 
 ## Español (México)
 
@@ -47,6 +47,30 @@ Or: download this kit as a zip (green **Code** button, then **Download ZIP**), r
 - It never sends emails or messages: drafts only.
 - It never asks for or saves passwords, ID numbers or bank details.
 - It only searches while your computer is on and the Claude app is open.
+
+## Lietuvių kalba
+
+Pagalbininkas Jūsų Windows kompiuteriui, padedantis ieškoti darbo, su **Claude** (Anthropic programa) ir užrašų knygele **Obsidian** programoje.
+
+- Pradedama nuo Jūsų seno gyvenimo aprašymo (CV): įklijuokite, nufotografuokite arba perskaitykite garsiai.
+- Pasikalba su Jumis apie Jūsų darbo patirtį ir tai, ko ieškote.
+- Jei norite, paieško apie Jus internete ir išsaugo tik tai, ką patvirtinate.
+- Kasdien ieško darbo skelbimų (LinkedIn, CV.lt, CVbankas.lt, CV Online, Užimtumo tarnyba) ir pasako, kurie tinka, o kurie atrodo kaip apgaulė.
+- Paruošia gyvenimo aprašymą ir motyvacinį laišką kiekvienam skelbimui, nieko neišgalvodamas, ir padaro failą (PDF ir Word), kurį galite pridėti.
+- Padeda kandidatuoti: visada pirma viską parodo ir du kartus paklausia leidimo.
+
+### Kaip įdiegti
+1. Įdiekite Claude programą ir prisijunkite (Code skilčiai reikia mokamo plano).
+2. Atidarykite programą, spustelėkite **Code** ir pasirinkite aplanką **Documents**.
+3. Įklijuokite `PASTE-THIS.md` tekstą (lietuvišką dalį) ir paspauskite Enter. Claude padarys visa kita.
+
+Lietuviškai diekite tik šiuo būdu: dukart spustelėjus **Install** iš zip failo, pagalbininkas įsidiegia ispaniškai.
+
+### Ko niekada nedaro
+- Niekada nekandidatuoja be Jūsų dviejų leidimų ir niekada į daug skelbimų iš karto.
+- Niekada nesiunčia laiškų ar žinučių: tik juodraščiai.
+- Niekada neprašo ir neišsaugo slaptažodžių, asmens kodo ar banko duomenų.
+- Ieško tik tada, kai kompiuteris įjungtas ir Claude programa atidaryta.
 
 ## Credits and licence
 Ideas borrowed from open-source projects are listed in `CREDITS.md`. This kit is released under the MIT licence (`LICENSE`). The Obsidian add-ons inside `vault-seed/.obsidian/plugins/` keep their own licences, in their folders.

@@ -1,6 +1,6 @@
 ---
 name: book-companion
-description: Reading companion that keeps one note per book with chapter notes, quotes and discussion questions, never repeats a topic, and suggests what to read next. Triggers: "I'm reading", "book notes", "estoy leyendo", "notas del libro".
+description: Reading companion that keeps one note per book with chapter notes, quotes and discussion questions, never repeats a topic, and suggests what to read next. Triggers: "I'm reading", "book notes", "estoy leyendo", "notas del libro", "skaitau knygą", "knygos užrašai".
 ---
 
 ## Steps

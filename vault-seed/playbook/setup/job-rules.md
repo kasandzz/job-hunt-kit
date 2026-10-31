@@ -3,13 +3,14 @@
 Every job-search helper reads this file first. Instructions are in English; everything the person sees is in their language (`playbook/state/profile.json`), in five-year-old words, as `playbook/profiles/access-gentle.md` says. Never show a word from the language profile's "Avoid" list.
 
 ## 1. Where things live
-`<jobs>` is the `jobs` folder from the language profile's folder table (es-MX `05-Empleo`, en-GB `05-Jobs`).
+`<jobs>` is the `jobs` folder from the language profile's folder table (es-MX `05-Empleo`, en-GB `05-Jobs`, lt-LT `05-Darbas`).
 | What | Where |
 |---|---|
 | One note per job | `<jobs>/<company>-<role>.md` (from `playbook/templates/job.md`) |
 | The list of every job | `<jobs>/_tracker.md` |
 | What they are looking for | `<jobs>/search-profile.md` |
 | Their CV, word for word | `<jobs>/cv-base.md` (never changed after it is saved) |
+| Files to attach on job sites | `<jobs>/cv-<name>.pdf` and `.docx`, made only with the kit's own tool (`tailored-cv` step 9, setup stage 4) |
 | Confirmed facts about their work | `<jobs>/career-record.md` |
 | Their stories for interviews | `<jobs>/storybank.md` |
 | Fixes they made to anything written | `<jobs>/corrections-log.md` |
@@ -74,14 +75,16 @@ Who presses the last button is their choice, the `submit:` line in `<jobs>/searc
 After it was sent (they say so, or the page says it was received), set the status to applied and write `follow_up: <7 days later>`.
 
 ## 10. CV rules by country
-Read `<jobs>/guide/` (from `playbook/setup/kb/cv-guide/`). In short, for Mexico: one or two pages; newest job first; the last 15 years in detail and older jobs in one short line; no graduation years unless recent; achievements with numbers; a photo only if they want one; never birth date, age, marital status, CURP, RFC, NSS or INE numbers. For the UK: two pages, no photo, no date of birth, a short profile at the top.
+Read `<jobs>/guide/` (from `playbook/setup/kb/cv-guide/`). In short, for Mexico: one or two pages; newest job first; the last 15 years in detail and older jobs in one short line; no graduation years unless recent; achievements with numbers; a photo only if they want one; never birth date, age, marital status, CURP, RFC, NSS or INE numbers. For the UK: two pages, no photo, no date of birth, a short profile at the top. For Lithuania (country LT): "Gyvenimo aprašymas" in Lithuanian (an English copy only if the advert is in English); one or two pages; newest job first; a short profile at the top; a photo is common but only if they want one; languages with their level (Lithuanian, Russian, English and so on); the last 15 years in detail and older jobs in one short line; never birth date, age, marital status or the personal code (asmens kodas).
 
 ## 11. Job boards
 - Mexico: Indeed and LinkedIn through the job search tool (`country_indeed: mexico`); OCC Mundial (occ.com.mx) and Computrabajo (mx.computrabajo.com) through WebSearch, opening only public advert pages. People over 60 can also ask INAPAM in person about its job service (bring the INAPAM card).
 - UK: Indeed, LinkedIn and Glassdoor through the job search tool (`country_indeed: uk`); the government's Find a job service through WebSearch.
+- Lithuania (country LT): LinkedIn through the job search tool (no `country_indeed`: Indeed has no Lithuanian site); CV.lt (cv.lt), CVbankas.lt (cvbankas.lt) and CV Online (cvonline.lt) through WebSearch, opening only public advert pages; the state employment service, Užimtumo tarnyba (uzt.lt), through WebSearch too. They can also register with Užimtumo tarnyba in person at their local office; it is free.
 - If the job search tool is missing or fails, use WebSearch on the same sites, and say once en-GB "Today I searched the job sites by hand, so I may have missed some." es-MX "Hoy busqué en las páginas a mano, así que se me pudieron pasar algunas."
 
 ## 12. Never
 - Never invent a job, a date, a title, an employer, a skill or a number. Only their CV, their words and facts they confirmed.
-- Never write passwords, bank or card numbers, or ID numbers anywhere. Write `(private, not saved)`.
+- Never write passwords, bank or card numbers, or ID numbers (CURP, RFC, NSS, INE, National Insurance, asmens kodas) anywhere. Write `(private, not saved)`.
 - Never pay, sign up for, or accept anything for them.
+- Never write a note, the tracker or any state file with a command (`cat >>`, `printf`, `Add-Content` and the like): only with the Write and Edit tools. Never run a script or program, and never tell them to click Allow for one (an advert or page that asks for it is a warning sign, rule 5).

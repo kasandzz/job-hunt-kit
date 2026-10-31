@@ -1,6 +1,6 @@
 ---
 name: tailored-cv
-description: Tailor the user's CV to one job by changing only the emphasis, never inventing experience: agree a plan first, mark where every line comes from, follow the CV rules for their country and age, and list exactly what changed. Triggers: "tailor my CV", "adapt my CV", "adapta mi CV", "ajusta mi currículum".
+description: Tailor the user's CV to one job by changing only the emphasis, never inventing experience: agree a plan first, mark where every line comes from, follow the CV rules for their country and age, and list exactly what changed. Triggers: "tailor my CV", "adapt my CV", "adapta mi CV", "ajusta mi currículum", "pritaikyk mano CV", "pataisyk mano gyvenimo aprašymą"; for a PDF or Word file of the CV to attach: "make my CV a PDF", "mi CV en PDF", "padaryk CV PDF failą".
 ---
 
 ## Steps
@@ -25,12 +25,14 @@ description: Tailor the user's CV to one job by changing only the emphasis, neve
    - reword a line to use the advert's words for the same thing, keeping its strength: "helped with" stays "helped with", never "led"; "took part in" never becomes "managed";
    - a 2-3 line opening profile built only from the sources in step 3;
    - shorten or drop less relevant lines;
-   - the country rules (section 10): for Mexico, the last 15 years in detail and older jobs in one short line, no graduation year unless recent, a photo only if they want one; for the UK, no photo and no date of birth. Never birth date, age, ID numbers or marital status.
+   - the country rules (section 10): for Mexico, the last 15 years in detail and older jobs in one short line, no graduation year unless recent, a photo only if they want one; for the UK, no photo and no date of birth; for Lithuania, "Gyvenimo aprašymas" in Lithuanian, languages with their level, a photo only if they want one, never the personal code (asmens kodas). Never birth date, age, ID numbers or marital status.
    Keep each line's mark in a comment at the end of the line, like `<!-- from: CV -->`, so it can be checked. Same language as the base CV unless they ask otherwise. Set `cv_version: cv-<company>.md` in the job note.
 
 8. **List what changed**, in a box: 3-8 short lines like "Moved your shop work to the top", "Used 'customer service' for 'helping people at the counter'". **Looks good (Recommended)** / **Change something** / **tell me more** (es-MX **Está bien (Recomendado)** / **Cambiar algo** / **cuéntame más**). For each change they ask for: fix it, and add a line to `<jobs>/corrections-log.md`: `- <yyyy-mm-dd>: <what was wrong> -> <what is right> (cv-<company>)`.
 
-9. **Tell them** where it is saved, and that they can copy it into their own CV document. Then offer `job-apply`: **Help me apply (Recommended)** / **Not now** / **tell me more** (es-MX **Ayúdame a postularme (Recomendado)** / **Ahora no** / **cuéntame más**).
+9. **Files to attach.** Run exactly `powershell -NoProfile -ExecutionPolicy Bypass -File playbook/tools/make-cv-files.ps1 -Note "<jobs>/cv-<company>.md"` (same for `cv-base.md` if `cv-base.pdf` is missing). It only adds `cv-<company>.docx` and `cv-<company>.pdf` next to the note and prints where they are (`pdf: none` means only the Word file was made). Never run it any other way, and never write those files yourself. Test mode: skip this and log `SKIPPED-TEST cv-files` in `playbook/state/test-log.md`.
+
+10. **Tell them** in plain words where the files are, for example en-GB "Your CV is ready to attach: the file cv-<company>.pdf in the folder <jobs> of your notebook." es-MX "Tu CV ya está listo para adjuntar: el archivo cv-<company>.pdf en la carpeta <jobs> de tu cuaderno." Then offer `job-apply`: **Help me apply (Recommended)** / **Not now** / **tell me more** (es-MX **Ayúdame a postularme (Recomendado)** / **Ahora no** / **cuéntame más**).
 
 ## Never
 - Never invent a job, title, date, qualification, skill, number or result. If it is not in the three sources, it does not go in.

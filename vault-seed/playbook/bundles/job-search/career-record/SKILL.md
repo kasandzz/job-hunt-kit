@@ -1,6 +1,6 @@
 ---
 name: career-record
-description: Keep their checked record of their working life, and, only with their OK, look them up on the internet (news, awards, articles, public profiles) and save only what they say is really them. Triggers: "look me up online", "my work record", "búscame en internet", "mi historial de trabajo".
+description: Keep their checked record of their working life, and, only with their OK, look them up on the internet (news, awards, articles, public profiles) and save only what they say is really them. Triggers: "look me up online", "my work record", "búscame en internet", "mi historial de trabajo", "paieškok manęs internete", "mano darbo istorija".
 ---
 
 ## Steps

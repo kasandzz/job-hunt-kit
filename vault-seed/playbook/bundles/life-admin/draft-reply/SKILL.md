@@ -1,6 +1,6 @@
 ---
 name: draft-reply
-description: Write a reply to an email and leave it in Gmail Drafts after the user approves the full text, never sending it. Triggers: "draft a reply", "reply to this email", "contesta este correo", "responde este correo".
+description: Write a reply to an email and leave it in Gmail Drafts after the user approves the full text, never sending it. Triggers: "draft a reply", "reply to this email", "contesta este correo", "responde este correo", "parašyk atsakymą", "atsakyk į šį laišką".
 ---
 
 ## Steps

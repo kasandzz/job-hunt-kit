@@ -1,6 +1,6 @@
 ---
 name: save-this
-description: Save anything for later (an idea, link, recipe, person or task) into the right folder with a one-line summary. Triggers: "save this", "remember this", "guarda esto", "acuérdate de esto".
+description: Save anything for later (an idea, link, recipe, person or task) into the right folder with a one-line summary. Triggers: "save this", "remember this", "guarda esto", "acuérdate de esto", "išsaugok tai", "įsimink tai".
 ---
 
 ## Steps
