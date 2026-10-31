@@ -6,6 +6,7 @@ Most kit files give the words to say in en-GB and es-MX only. For lt-LT, take th
 ## Words to use / avoid
 Use: kompiuteris, telefonas, el. paštas, laiškas, aplankas, užrašas, išsaugoti, atsarginė kopija, Jūsų užrašų knygelė (vietoj vault), pagalbininkas (vietoj skill), priedas (vietoj plugin), kalendorius, kopija internete, spustelėkite, langelis, gyvenimo aprašymas (CV).
 Avoid: terminal, Git, repo, YAML, frontmatter, MCP, skill, hook, commit, push, komandinė eilutė, PowerShell, vault, emailas, meilas, klikinti, klikas, skilas, promptas, failiukas, sesija.
+Where a file says to write `(private, not saved)` in place of a password or number, write exactly `(privatu, neišsaugota)`.
 ## Folder names
 | key | folder |
 |---|---|

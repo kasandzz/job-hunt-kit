@@ -4,6 +4,7 @@ Español mexicano, de tú. Cálido y directo. Frases cortas. Llama a la persona 
 ## Words to use / avoid
 Use: computadora, celular, correo, carpeta, nota, guardar, respaldo, tu cuaderno (para el vault), ayudante (para un skill), extra o complemento (para un plugin), agenda o calendario, copia en línea, dale clic, cuadrito o aviso.
 Avoid: ordenador, móvil, vale, vosotros, coger, terminal, Git, repo, YAML, frontmatter, MCP, skill, hook, commit, push, línea de comandos, PowerShell, vault.
+Where a file says to write `(private, not saved)` in place of a password or number, write exactly `(privado, no guardado)`.
 ## Folder names
 | key | folder |
 |---|---|

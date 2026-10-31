@@ -54,7 +54,7 @@
       "mcp__claude_ai_Google_Drive__search_files", "mcp__claude_ai_Google_Drive__read_file_content",
       "mcp__jobspy__search_jobs", "mcp__jobspy__get_job_details",
       "mcp__claude_ai_Indeed__search_jobs", "mcp__claude_ai_Indeed__get_job_details", "mcp__claude_ai_ZipRecruiter__search_jobs",
-      "Bash(git status:*)", "Bash(git log:*)",
+      "Bash(git status)", "Bash(git log -1 --oneline)", "PowerShell(git status)", "PowerShell(git log -1 --oneline)",
       "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File playbook/tools/get-subs.ps1:*)",
       "PowerShell(powershell -NoProfile -ExecutionPolicy Bypass -File playbook/tools/get-subs.ps1:*)",
       "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File .\\playbook\\tools\\get-subs.ps1:*)",

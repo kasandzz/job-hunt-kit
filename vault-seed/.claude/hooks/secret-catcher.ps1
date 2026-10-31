@@ -29,7 +29,9 @@ function Test-Clabe([string]$d) {
 # Without this the kit's own placeholder raised a false "password hidden" alarm (sandbox test 2026-10-30).
 function Test-NotSecret([string]$v) {
   $t = $v.Trim().Trim([char]96, [char]34, [char]39, [char]42, [char]95).Trim()
-  if ($t -eq '[hidden]' -or $t -match '^\([^()]{0,60}\s[^()]{0,60}\)\.?$') { return $true }   # a few words in brackets, never one bare token
+  # Only the exact placeholders the kit writes (en, es, lt); any other bracketed text is still hidden.
+  $ph = @('[hidden]', '(private, not saved)', '(privado, no guardado)', ('(privatu, nei' + [char]0x161 + 'saugota)'))
+  if ($ph -contains $t.TrimEnd('.')) { return $true }
   return ($t -match ('(?i)^(yes|no|si|s' + [char]0xED + '|known|unknown|knows it|sabe|la sabe|no la sabe|ok|n/a|none|ninguna|taip|ne|-)$'))
 }
 # password-like lines: keep the label, hide the value. Separators : = - es is.

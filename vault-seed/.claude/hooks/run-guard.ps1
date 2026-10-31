@@ -26,6 +26,24 @@ try {
     ($ps + 'playbook[\\/]tools[\\/]make-cv-files\.ps1 -Note ' + $note + '$')
   )
   foreach ($o in $own) { if ($c -cmatch $o) { exit 0 } }
+  # git and gh: only the exact commands the kit's stage and helper files give. Everything else (any other
+  # subcommand or flag, --output, -c, --exec, --upload-pack, clone, pull, fetch, checkout, apply, download...) blocks.
+  $nm = '[A-Za-z0-9._-]{1,100}'; $us = '[A-Za-z0-9-]{1,39}'; $cn = '(?:origin|backup-unchecked)'
+  $qt = '"[^"`$;|&<>\r\n]{1,200}"'
+  $pa = '(?:"[^"`$;|&<>\r\n]{1,300}"|[\p{L}\p{N}_/\\][\p{L}\p{N}._/\\-]{0,299})'
+  $gitOk = @('^git --version$', '^git status$', '^git init$', '^git remote$', '^git log -1 --oneline$',
+    '^git config core\.quotepath(?: false)?$', ('^git config user\.name ' + $qt + '$'), '^git config user\.email "[^"`$;|&<>\s]{3,120}"$',
+    ('^git add (?:-- )?' + $pa + '(?: ' + $pa + '){0,200}$'), ('^git commit -m ' + $qt + '$'),
+    ('^git remote add backup-unchecked https://github\.com/' + $us + '/' + $nm + '$'),
+    '^git remote rename (?:origin backup-unchecked|backup-unchecked origin)$', ('^git remote get-url ' + $cn + '$'),
+    ('^git ls-remote ' + $cn + '$'), '^git push -u origin HEAD$')
+  $ghOk = @('^gh auth status$', '^gh auth login --web --hostname github\.com --git-protocol https$', '^gh auth setup-git$',
+    ('^gh repo view(?: ' + $nm + ')? --json (visibility|url|nameWithOwner) -q \.\1$'),
+    ('^gh repo create ' + $nm + ' --private --source \. --remote backup-unchecked$'),
+    ('^gh api users/' + $us + ' --jq "\[\.login, \.name\] \| @tsv"$'),
+    ('^gh api -X PUT repos/' + $us + '/' + $nm + '/collaborators/' + $us + ' -f permission=pull$'),
+    ('^gh api -X DELETE repos/' + $us + '/' + $nm + '/collaborators/' + $us + '$'))
+  foreach ($o in ($gitOk + $ghOk)) { if ($c -cmatch $o) { exit 0 } }
   # Opening a web page, the Obsidian notebook or Chrome on a web page is fine (no program of the person's choosing).
   if ($c -match '^Start-Process (?:chrome )?"(?:https://|obsidian://open\?path=)[^"`$;|&<>]{1,800}"$') { exit 0 }
 
@@ -55,18 +73,27 @@ try {
     'get-content','gc','cat','type','head','tail','select-string','sls','grep','rg','findstr','get-item','gi','test-path','get-timezone',
     'get-date','date','resolve-path','split-path','join-path','measure-object','measure','sort-object','sort','select-object','select',
     'where-object','?','foreach-object','%','format-table','ft','format-list','fl','out-null','out-string','echo','write-output',
-    'write-host','wc','uniq','get-command','gcm','whoami','hostname','convertfrom-json','convertto-json','get-filehash','true')
-  $bare = [regex]::Replace($c,'"[^"]*"|''[^'']*''', '""')   # quoted text is data, not a command
-  foreach ($seg in ($bare -split '[;|&(){}\r\n]')) {
+    'write-host','wc','get-command','gcm','whoami','hostname','convertfrom-json','convertto-json','get-filehash','true')
+  # Quoted text is data, not a command: set it aside so ; | & inside quotes do not split a command.
+  $qs = New-Object System.Collections.Generic.List[string]
+  $one = [string][char]1
+  $tok = [regex]::Replace($c, '"[^"]*"|''[^'']*''', { param($m) $qs.Add($m.Value); $one + ($qs.Count - 1) + $one })
+  foreach ($seg in ($tok -split '[;|&(){}\r\n]')) {
     $t = $seg.Trim(); if (-not $t) { continue }
     $head = ($t -split '\s+')[0].ToLowerInvariant()
     if ($okHeads -notcontains $head) { Block "program or script: $head" $RunMsg }
+    $full = [regex]::Replace($t, ($one + '(\d+)' + $one), { param($m) $qs[[int]$m.Groups[1].Value] })
+    $full = ($full -replace '\s+', ' ').Trim()
+    if ($head -eq 'git' -or $head -eq 'gh') {
+      $list = $gitOk; if ($head -eq 'gh') { $list = $ghOk }
+      $hit = $false; foreach ($o in $list) { if ($full -cmatch $o) { $hit = $true; break } }
+      if (-not $hit) { Block "git or gh command not on the notebook's list" $RunMsg }
+    }
+    # sort and rg can write a file or run a program through a flag.
+    if (($head -eq 'sort' -or $head -eq 'rg') -and $full -match '(?i)\s(?:-o|--output|--pre|--pre-glob)(?:[\s=]|$)') { Block 'file write by command' $WriteMsg }
   }
-  # gh and Obsidian can run code through some of their commands.
-  if ($c -match '(?i)\bgh\s+(?:extension|ext|alias)\b|\bobsidian\s+(?:eval|command|dev\S*|devtools|plugin\S*|theme\S*|snippet\S*)') { Block 'program or script' $RunMsg }
-  # git can run programs through its settings: only the three settings the kit itself uses may be set.
-  if ($c -match '(?i)\bgit\b' -and ($c -match '(?i)\bgit\s+(?:[^;&|]*\s)?-c\s|--upload-pack|--receive-pack|--exec\b|\bcore\.(?:hookspath|sshcommand|editor|pager|fsmonitor|gitproxy|askpass)|\balias\.|\bfilter\.|\bdiff\.\w+\.textconv' -or
-      ($c -match '(?i)\bgit\s+config\b' -and $c -notmatch '(?i)^git config (?:core\.quotepath(?: false)?|user\.name "[^"`$;|&<>]{1,80}"|user\.email "[^"`$;|&<>\s]{3,120}")$'))) { Block 'program or script' $RunMsg }
+  # Obsidian can run code through some of its commands.
+  if ($c -match '(?i)\bobsidian\s+(?:eval|command|dev\S*|devtools|plugin\S*|theme\S*|snippet\S*)') { Block 'program or script' $RunMsg }
   exit 0
 } catch {
   Block 'the safety check could not read the command' $RunMsg
